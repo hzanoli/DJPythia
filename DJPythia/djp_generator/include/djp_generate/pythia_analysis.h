@@ -1,9 +1,9 @@
 #ifndef DJPYTHIA_PYTHIA_ANALYSIS_PYTHIA_ANALYSIS_H_
 #define DJPYTHIA_PYTHIA_ANALYSIS_PYTHIA_ANALYSIS_H_
 
-#include "../data_model/origin.h"
-#include "../data_model/particle.h"
 #include "Pythia8/Pythia.h"
+#include "djp_data_model/origin.h"
+#include "djp_data_model/particle.h"
 
 namespace djpythia {
 namespace pythia_analysis {

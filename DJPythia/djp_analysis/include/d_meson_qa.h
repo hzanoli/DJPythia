@@ -14,11 +14,9 @@ private:
   TH1D production_vertex_z_;
 public:
   ParticleQAHistograms(std::string name);
-
-  TH1D& 
 };
 
-class DMesonQAHistograms: public ParticleQAHistograms{
+class DMesonQAHistograms{
 };
 
 

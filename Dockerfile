@@ -74,9 +74,13 @@ RUN apt-get update  \
     g++ \
     gcc \
     gdb \
+    linux-base \
+    linux-tools-common \
+    linux-tools-generic \
     rsync \
     ssh \
     tar \
+    valgrind \
     wget \
     && apt-get clean
 

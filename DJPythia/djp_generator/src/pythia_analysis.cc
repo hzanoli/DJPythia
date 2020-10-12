@@ -1,4 +1,4 @@
-#include "pythia_analysis.h"
+#include "djp_generate/pythia_analysis.h"
 
 namespace dm = djpythia::data_model;
 

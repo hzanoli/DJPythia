@@ -58,10 +58,10 @@ class TreeReader {
 
   TreeReader::Iterator begin() {
     tree_reader_.Next();  // Initialize the Tree reading
-    return iterator(*this, 0);
+    return Iterator(*this, 0);
   };
 
-  TreeReader::Iterator end() { return iterator(*this, -1); };
+  TreeReader::Iterator end() { return Iterator(*this, -1); };
 };
 
 }  // namespace tree_analysis

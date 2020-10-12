@@ -1,4 +1,4 @@
-#include "d_meson_qa.h"
+#include "../include/d_meson_qa.h"
 
 ParticleQAHistograms::ParticleQAHistograms(std::string name)
     : pt_{(name + "_pt").c_str(), (name + " p_{T};p_{T} [GeV/c];Counts").c_str(),

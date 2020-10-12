@@ -1,4 +1,4 @@
-#include "d_meson.h"
+#include "../include/djp_data_model/d_meson.h"
 
 #include <utility>
 namespace dm = djpythia::data_model;

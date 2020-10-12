@@ -1,4 +1,4 @@
-#include "particle.h"
+#include "../include/djp_data_model/particle.h"
 
 djpythia::data_model::Particle::Particle(double px, double py, double pz,
                                          double vertex_x, double vertex_y,

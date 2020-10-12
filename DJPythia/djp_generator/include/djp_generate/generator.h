@@ -44,8 +44,8 @@ class PythiaGenerator {
     bool operator!=(const Iterator& lhs) const { return !(*this == lhs); }
 
     // Operator for it++ (postfix).
-    Iterator operator++(int) {
-      auto value_before_increase = *this;
+    const Iterator operator++(int) {
+      const auto value_before_increase = *this;
       this->operator++();
       return value_before_increase;
     }

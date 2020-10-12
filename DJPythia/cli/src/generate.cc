@@ -3,11 +3,11 @@
 
 #include "boost/program_options.hpp"
 
-#include "data_model/d_meson.h"
-#include "data_model/event.h"
-#include "data_model/particle.h"
-#include "generator/generator.h"
-#include "pythia_analysis/pythia_analysis.h"
+#include "djp_generate/generator.h"
+#include "djp_generate/pythia_analysis.h"
+#include "djp_data_model/d_meson.h"
+#include "djp_data_model/event.h"
+#include "djp_data_model/particle.h"
 
 #include "TFile.h"
 #include "TTree.h"

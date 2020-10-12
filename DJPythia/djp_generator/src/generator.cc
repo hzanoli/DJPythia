@@ -1,4 +1,4 @@
-#include "generator.h"
+#include "djp_generate/generator.h"
 
 #include <utility>
 djpythia::generator::PythiaGenerator::PythiaGenerator(std::string config_file,

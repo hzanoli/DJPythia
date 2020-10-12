@@ -1,5 +1,5 @@
 
-#include "event.h"
+#include "../include/djp_data_model/event.h"
 
 #include <utility>
 djpythia::data_model::Event::Event(std::vector<DMeson> dmesons)

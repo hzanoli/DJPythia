@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
-project(DJPythia VERSION 1.0.0)
-
-set(CMAKE_BUILD_TYPE Debug)
+project(DJPythia VERSION 1.0.0
+                 DESCRIPTION "Simulations of D meson excited states PYTHIA8"
+                 LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 list(APPEND CMAKE_PREFIX_PATH "/root-cern/root/cmake")
@@ -17,19 +17,11 @@ include(${ROOT_USE_FILE})
 #include PYTHIA
 find_package(Pythia8 REQUIRED)
 
-add_subdirectory(data_model)
-add_subdirectory(generator)
-add_subdirectory(pythia_analysis)
-add_subdirectory(tree_analysis)
+message(${PYTHIA8_INCLUDE_DIR})
 
-add_executable(djpythia main.cc)
-target_link_libraries(djpythia PUBLIC djpythia_generator djpythia_data_model
-                      djpythia_pythia_analysis "${PYTHIA8_LIBRARIES}"
-                      ROOT::Tree ROOT::RIO Boost::program_options)
-
-target_compile_features(djpythia PRIVATE cxx_std_14)
-target_compile_options(djpythia PRIVATE -O2 -pedantic -W -Wall -Wshadow -fPIC)
-
-
+add_subdirectory(djp_data_model)
+add_subdirectory(djp_generator)
+add_subdirectory(djp_analysis)
+add_subdirectory(cli)
 
 
