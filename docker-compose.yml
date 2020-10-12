@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  djpythia:
+    build:
+      context: .
+      target: dev
+    environment:
+      PYTHIA8_ROOT_DIR: /pythia/pythia8/
+      ROOT_DIR: /root-cern/root/cmake
+    volumes:
+    - ./DJPythia:/DJPythia
+    working_dir: /DJPythia
+    ports:
+    - "2222:22"
