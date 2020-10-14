@@ -1,5 +1,6 @@
 #include "../include/djp_data_model/particle.h"
 
+ClassImp(djpythia::data_model::Particle)
 djpythia::data_model::Particle::Particle(double px, double py, double pz,
                                          double vertex_x, double vertex_y,
                                          double vertex_z, double eta, double phi,

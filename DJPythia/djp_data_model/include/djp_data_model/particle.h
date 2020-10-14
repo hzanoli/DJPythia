@@ -1,16 +1,19 @@
 #ifndef DJPYTHIA_DATA_MODEL_PARTICLE_H_
 #define DJPYTHIA_DATA_MODEL_PARTICLE_H_
+#include "TObject.h"
 #include "origin.h"
+#include <cmath>
 
 namespace djpythia {
 namespace data_model {
 /* Class to represent a particle in the simulation. The variables called "p" are
  * a reference to the momentum of the particle. */
-class Particle {
+class Particle : public TObject {
 public:
   /* Constructs a particle from the provided information. */
   Particle(double px, double py, double pz, double vertex_x, double vertex_y,
-           double vertex_z, double eta, double phi, int pdg_code, HFSource origin);
+           double vertex_z, double eta, double phi, int pdg_code,
+           HFSource origin);
 
   /* Default constructor. Creates an empty particle. */
   Particle() = default;
@@ -18,10 +21,16 @@ public:
   double Px() const { return px_; }
   double Py() const { return py_; }
   double Pz() const { return pz_; }
+  double Pt() const { return sqrt(Px() * Px() + Py() * Py()); };
+  double P() const { return sqrt(Px() * Px() + Py() * Py() + Pz() * Pz()); };
 
   double VertexX() const { return vertex_x_; }
   double VertexY() const { return vertex_y_; }
   double VertexZ() const { return vertex_z_; }
+
+  std::vector<double> Vertex() const {
+    return {VertexX(), VertexY(), VertexZ()};
+  };
 
   double Eta() const { return eta_; }
   double Phi() const { return phi_; }
@@ -42,6 +51,8 @@ private:
 
   int pdg_code_{-999};
   HFSource origin_{HFSource::kNone};
+
+  ClassDef(Particle, 1);
 };
 
 } // namespace data_model

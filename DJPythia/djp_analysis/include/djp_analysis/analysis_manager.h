@@ -1,11 +1,15 @@
 #ifndef DJPYTHIA_DJPYTHIA_TREE_ANALYSIS_ANALYSIS_MANAGER_H_
 #define DJPYTHIA_DJPYTHIA_TREE_ANALYSIS_ANALYSIS_MANAGER_H_
 
-#include "task.h"
-#include "tree_reader.h"
+#include <functional>
 #include <memory>
 #include <utility>
 #include <vector>
+
+#include "djp_data_model/event.h"
+
+#include "djp_analysis/task.h"
+#include "djp_analysis/tree_reader.h"
 
 namespace djpythia {
 namespace tree_analysis {
@@ -17,18 +21,25 @@ namespace tree_analysis {
  * 3.) The analysis manager will execute the CreateOutput for each task.
  * 4.) The analysis manager will read each event from the tree reader.
  * 5.) The analysis manager will call Terminate for each task.
+ * 6.) The analysis manager will call Save for each task.
  *  */
-template <typename Event> class AnalysisManager {
+class AnalysisManager {
 public:
-  explicit AnalysisManager(const TreeReader<Event> &reader,
-                  std::vector<std::unique_ptr<Task>> tasks =
-                      std::vector<std::unique_ptr<Task>>())
-      : reader_(reader), tasks_(std::move(tasks)) {}
+  explicit AnalysisManager(
+      const std::string &file_path, const std::string &tree_name,
+      const std::string &branch_name,
+      const std::function<std::vector<std::unique_ptr<Task>>()> &add_tasks)
+      : reader_(file_path, tree_name, branch_name), tasks_(add_tasks()),
+        output_file_("results.root", "RECREATE") {}
+
+  void PerformAnalysis();
 
 private:
-  djpythia::tree_analysis::TreeReader<Event> reader_;
+  djpythia::tree_analysis::TreeReader<djpythia::data_model::Event> reader_;
   std::vector<std::unique_ptr<Task>> tasks_;
+  TFile output_file_;
 };
+
 } // namespace tree_analysis
 } // namespace djpythia
 

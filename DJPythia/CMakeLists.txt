@@ -16,12 +16,9 @@ include(${ROOT_USE_FILE})
 
 #include PYTHIA
 find_package(Pythia8 REQUIRED)
-
-message(${PYTHIA8_INCLUDE_DIR})
-
 add_subdirectory(djp_data_model)
 add_subdirectory(djp_generator)
 add_subdirectory(djp_analysis)
-add_subdirectory(cli)
+add_subdirectory(dpj_cli)
 
 

@@ -1,6 +1,8 @@
 #ifndef DJPYTHIA_TREE_ANALYSIS_TREE_READER_H_
 #define DJPYTHIA_TREE_ANALYSIS_TREE_READER_H_
 #include <string>
+#include <iostream>
+#include <iterator>
 
 #include "TFile.h"
 #include "TTreeReader.h"
@@ -20,27 +22,26 @@ class TreeReader {
   TTreeReaderValue<T> reader_value_;
 
  public:
-  class Iterator {
+  class Iterator : public std::iterator<std::input_iterator_tag, const T> {
    private:
     TreeReader* reader_;
-    TTreeReader::Iterator_t tree_iteration_;
+    bool is_valid_;
 
    public:
-    Iterator() = default;
-    Iterator(TreeReader& reader, Long64_t entry)
-        : reader_(&reader), tree_iteration_(reader.tree_reader_, entry){};
+    Iterator(TreeReader& reader, bool is_valid)
+        : reader_(&reader), is_valid_(is_valid) {};
 
     bool operator==(const Iterator& rhs) const {
-      return reader_ == rhs.reader_ && tree_iteration_ == rhs.tree_iteration_;
+      return (reader_ == rhs.reader_) && (is_valid_ == rhs.is_valid_);
     }
     bool operator!=(const Iterator& rhs) const { return !(rhs == *this); }
 
     Iterator& operator++() {
-      ++tree_iteration_;
+      is_valid_ = reader_->tree_reader_.Next();
       return *this;
     }
 
-    const Iterator operator++(int) {
+    Iterator operator++(int) {
       Iterator value = *this;
       ++(*this);
       return value;
@@ -49,7 +50,8 @@ class TreeReader {
     const T& operator*() const { return *(reader_->reader_value_); }
   };
 
-  // Given a file path, the name of the tree and and
+  // Given a file path, the name of the tree and and the branch name, creates a
+  // tree reader.
   TreeReader(const std::string& file_path, const std::string& tree_name,
              const std::string& branch_name)
       : file_(file_path.c_str()),
@@ -58,10 +60,10 @@ class TreeReader {
 
   TreeReader::Iterator begin() {
     tree_reader_.Next();  // Initialize the Tree reading
-    return Iterator(*this, 0);
+    return Iterator(*this, true);
   };
 
-  TreeReader::Iterator end() { return Iterator(*this, -1); };
+  TreeReader::Iterator end() { return Iterator(*this, false); };
 };
 
 }  // namespace tree_analysis
