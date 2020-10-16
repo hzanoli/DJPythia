@@ -1,5 +1,5 @@
 # Library with the base classes
-add_library(djp_tree_analysis SHARED
+add_library(djp_tree_analysis STATIC
         include/djp_analysis/tree_reader.h
         src/analysis_manager.cc include/djp_analysis/analysis_manager.h
         src/task.cc include/djp_analysis/task.h)
@@ -17,7 +17,7 @@ target_compile_options(djp_tree_analysis
         PRIVATE -O2 -pedantic -W -Wall -Wshadow -fPIC)
 
 # Library with the user defined Tasks
-add_library(djp_user_tree_analysis SHARED src/task_d.cc include/djp_analysis/task_d.h)
+add_library(djp_user_tree_analysis STATIC src/task_d.cc include/djp_analysis/task_d.h)
 
 target_link_libraries(djp_user_tree_analysis
         PUBLIC djp_tree_analysis djp_data_model)

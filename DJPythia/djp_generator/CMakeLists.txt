@@ -1,4 +1,4 @@
-add_library(djp_generator SHARED src/generator.cc
+add_library(djp_generator STATIC src/generator.cc
         include/djp_generate/generator.h
         src/pythia_analysis.cc include/djp_generate/pythia_analysis.h)
 
@@ -12,4 +12,4 @@ target_compile_options(djp_generator
 
 target_link_libraries(djp_generator PUBLIC ${PYTHIA8_LIBRARIES} djp_data_model)
 
-target_compile_options(djp_generator PRIVATE -O2 -pedantic -W -Wall -Wshadow -fPIC)
+target_compile_options(djp_generator PRIVATE -O3 -pedantic -W -Wall -Wshadow -fPIC)

@@ -12,6 +12,7 @@ djpythia::generator::PythiaGenerator::PythiaGenerator(std::string config_file,
   pythia_.readString("Random:seed = " + std::to_string(seed));
   pythia_.init();
 }
+
 djpythia::generator::PythiaGenerator::Iterator::Iterator(
     djpythia::generator::PythiaGenerator& generator, long int position):
     generator_{&generator}, position_{position}{}

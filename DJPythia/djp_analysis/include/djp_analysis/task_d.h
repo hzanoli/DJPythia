@@ -39,6 +39,7 @@ public:
   TH1D &HistVertexZ() { return h_vertex_z_; }
   TH2D &HistVertexXY() { return h_vertex_x_y_; }
   TH1D &HistDecayLength() { return h_decay_length_; }
+  TH1D &HistDecayLengthPrimary() { return h_decay_length_primary_vertex_; }
 
 private:
   std::string name_;
@@ -53,6 +54,7 @@ private:
   TH2D h_vertex_x_y_;
 
   TH1D h_decay_length_;
+  TH1D h_decay_length_primary_vertex_;
 
   std::string GetHistName(const std::string& feature) const;
 };

@@ -47,11 +47,10 @@ djpythia::data_model::HFSource CheckSource(const Pythia8::Event &event,
 
 djpythia::data_model::Particle MakeParticle(const Pythia8::Particle &particle,
                                             const Pythia8::Event &event) {
-  return {particle.px(),    particle.py(),
-          particle.pz(),    particle.xProd(),
-          particle.yProd(), particle.zProd(),
-          particle.eta(),   particle.phi(),
-          particle.id(),    CheckSource(event, particle.index())};
+  return djpythia::data_model::Particle(
+      particle.px(), particle.py(), particle.pz(), particle.xProd(),
+      particle.yProd(), particle.zProd(), particle.tProd(), particle.eta(),
+      particle.phi(), particle.id(), CheckSource(event, particle.index()));
 }
 } // namespace pythia_analysis
 } // namespace djpythia

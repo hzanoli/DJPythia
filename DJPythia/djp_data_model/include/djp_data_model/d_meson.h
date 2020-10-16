@@ -19,6 +19,8 @@ public:
 
   double DecayLength() const;
 
+  double DecayLengthToPrimaryVertex() const;
+
 private:
   std::vector<Particle> daughters_;
   ClassDef(DMeson, 1);

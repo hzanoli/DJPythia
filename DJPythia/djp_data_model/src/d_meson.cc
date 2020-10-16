@@ -21,3 +21,15 @@ double dm::DMeson::DecayLength() const {
                    std::pow(d_vertex[1] - daughter_vertex[1], 2) +
                    std::pow(d_vertex[2] - daughter_vertex[2], 2));
 }
+
+double dm::DMeson::DecayLengthToPrimaryVertex() const {
+  if (Daughters().empty())
+    return -999;
+
+  std::vector<float> d_vertex = {0., 0., 0.};
+  auto daughter_vertex = Daughters()[0].Vertex();
+
+  return std::sqrt(std::pow(d_vertex[0] - daughter_vertex[0], 2) +
+                   std::pow(d_vertex[1] - daughter_vertex[1], 2) +
+                   std::pow(d_vertex[2] - daughter_vertex[2], 2));
+}

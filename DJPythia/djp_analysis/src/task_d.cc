@@ -60,6 +60,10 @@ djpythia::tree_analysis::DMesonQA::DMesonQA(
       VerboseName() + " Decay Length; Decay Length [mm]; Counts";
   h_decay_length_ = TH1D(decay_length_name.c_str(), decay_length_title.c_str(),
                          n_bins_decay_length, 0, 100);
+
+  h_decay_length_primary_vertex_ =
+      TH1D(decay_length_name.c_str(), decay_length_title.c_str(),
+           n_bins_decay_length, 0, 100);
 }
 
 void djpythia::tree_analysis::DMesonQA::Fill(
@@ -75,6 +79,7 @@ void djpythia::tree_analysis::DMesonQA::Fill(
   HistVertexXY().Fill(particle.VertexX(), particle.VertexY());
 
   HistDecayLength().Fill(particle.DecayLength());
+  HistDecayLengthPrimary().Fill(particle.DecayLengthToPrimaryVertex());
 }
 
 void djpythia::tree_analysis::DMesonQA::Save(TList &output_list) {
